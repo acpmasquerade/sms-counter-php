@@ -17,6 +17,15 @@ stdClass Object
 	[messages] => 1
 )
 ```
+##Installation
+`sms-counter-php` is available via [composer](http://getcomposer.org) on [packagist](https://packagist.org/packages/acpmasquerade/sms-counter-php).  
+```json
+{
+    "require": {
+        "acpmasquerade/sms-counter-php": "dev-master"
+    }
+}
+```
 
 ##License
 SMS Counter (PHP) is released under the [MIT License](LICENSE.txt)
