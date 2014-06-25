@@ -17,3 +17,6 @@ which returns
 		[messages] => 1
 	)
 ```
+
+##License
+SMS Counter (PHP) is released under the [MIT License](License.txt)
