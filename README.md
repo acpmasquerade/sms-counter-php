@@ -19,4 +19,4 @@ which returns
 ```
 
 ##License
-SMS Counter (PHP) is released under the [MIT License](License.txt)
+SMS Counter (PHP) is released under the [MIT License](LICENSE.txt)
