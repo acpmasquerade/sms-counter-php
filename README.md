@@ -6,3 +6,14 @@ Original insipration : [danxexe/sms-counter](https://github.com/danxexe/sms-coun
 ```php
 SMSCounter::count('some-string-to-be-counted');	
 ```
+which returns
+```
+	stdClass Object
+	(
+		[encoding] => GSM_7BIT
+		[length] => 25
+		[per_message] => 160
+		[remaining] => 135
+		[messages] => 1
+	)
+```
