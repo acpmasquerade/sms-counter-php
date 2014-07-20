@@ -232,6 +232,11 @@ class SMSCounter{
       return $utf8char;
     }
 
+    /**
+     * Converts unicode code points array to a utf8 str
+     * @param $array - unicode codepoints array
+     * @return $str - utf8 string
+     */
     public static function unicode_to_utf8($array){
       $str = '';
       foreach($array as $a){
