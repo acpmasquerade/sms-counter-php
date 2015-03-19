@@ -273,7 +273,8 @@ class SMSCounter{
       }
 
       $replacement_array = array();
-      $replacement_unicode = array_pop(self::utf8_to_unicode($replacement));
+      $unicode_arr = self::utf8_to_unicode($replacement);
+      $replacement_unicode = array_pop($unicode_arr);
 
       foreach($all_chars as $some_position=>$some_char){
         if(!in_array($some_char, $valid_chars)){
