@@ -1,6 +1,7 @@
 <?php
 
 error_reporting(E_ALL);
+
 include __DIR__."/../lib/SMSCounter.php";
 
 class SMSCounterTest extends PHPUnit_Framework_TestCase
@@ -76,6 +77,20 @@ class SMSCounterTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $count);
 
+	}
+
+	public function testCarriageReturn(){
+		$text = "\n\r";
+		$count = SMSCounter::count($text);
+
+		$expected = new stdClass();
+		$expected->encoding = SMSCounter::GSM_7BIT;
+		$expected->length = 2;
+		$expected->per_message = 160;
+		$expected->remaining = 158;
+		$expected->messages = 1;
+		
+		$this->assertEquals($expected, $count);
 	}
 
     public function testUnicode()
