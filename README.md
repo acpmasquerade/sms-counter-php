@@ -2,6 +2,8 @@
 Character counter for SMS Messages
 Original insipration : [danxexe/sms-counter](https://github.com/danxexe/sms-counter)
 
+[![Build Status](https://travis-ci.org/acpmasquerade/sms-counter-php.svg?branch=master)](https://travis-ci.org/acpmasquerade/sms-counter-php)
+
 ##Usage
 ```php
 SMSCounter::count('some-string-to-be-counted');	
