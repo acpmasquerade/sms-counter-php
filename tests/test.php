@@ -24,6 +24,30 @@ class SMSCounterTest extends PHPUnit_Framework_TestCase
 	
 	}
 
+	public function testIntMapIsComplete(){
+		$gsm_7bit_map = SMSCounter::int_gsm_7bit_map();
+		$gsm_7bit_ex_map = SMSCounter::int_gsm_7bit_ex_map();		
+		$this->assertEquals(127, count($gsm_7bit_map));
+		$this->assertEquals(9, count($gsm_7bit_ex_map));
+	}
+
+	public function testEachGSM(){
+		$character_set = SMSCounter::gsm_7bit_chars;
+		$len = strlen($character_set);
+		for($i = 0; $i< $len; $i++){
+			$this->assertEquals(SMSCounter::GSM_7BIT, SMSCounter::count($character_set[$i]."")->encoding, sprintf("Testing for character %s for GSM_7BIT", $character_set[$i].""));
+		}
+		$extra_character_set = array("|", "^", "{", "}", "[", "]", "~", "\\", "€");
+		for($i = 0; $i< count($extra_character_set); $i++){
+			$char = $extra_character_set[$i];
+			if(SMSCounter::utf8_to_unicode($char) == 0){
+				continue;
+			}
+			$this->assertEquals(SMSCounter::GSM_7BIT_EX, SMSCounter::count($char."")->encoding, sprintf("Testing for character '%c' for GSM_7BIT", $char));
+		}
+
+	}
+
 	public function testGSMMultiPage(){
 	     $text = "1234567890";
 	     $text .= "1234567890";
