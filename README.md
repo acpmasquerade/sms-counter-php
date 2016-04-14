@@ -29,5 +29,17 @@ stdClass Object
 }
 ```
 
+###Install from WobbleCode repo 
+#####(PS: Separately maintained and slightly deviated.) Please check their documentation before updating your existing installation.
+[https://github.com/wobblecode/sms-counter-php](https://github.com/wobblecode/sms-counter-php)
+`sms-counter-php` is available via [composer](http://getcomposer.org) on [packagist](https://packagist.org/packages/wobblecode/sms-counter-php).  
+```json
+{
+    "require": {
+        "wobblecode/sms-counter-php": "dev-master"
+    }
+}
+```
+
 ##License
 SMS Counter (PHP) is released under the [MIT License](LICENSE.txt)
