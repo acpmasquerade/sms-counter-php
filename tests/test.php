@@ -133,6 +133,22 @@ class SMSCounterTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $count);
     }
 
+    public function testSurrogateUnicode()
+    {
+        $text = "🎈";
+
+		$count = SMSCounter::count($text);
+
+		$expected = new stdClass();
+		$expected->encoding = SMSCounter::UTF16;
+		$expected->length = 2;
+		$expected->per_message= 70;
+		$expected->remaining = 68;
+		$expected->messages = 1;
+
+		$this->assertEquals($expected, $count);
+    }
+
 	public function testRemoveNonGSMChars(){
 		$text = "no-unicode-remaining";
 
