@@ -89,14 +89,30 @@ class SMSCounter{
     $ex_chars = array();
     $encoding = self::detect_encoding($unicode_array, $ex_chars);
 
-    $length = count($unicode_array);
+    if ($encoding === self::UTF16) {
 
-    if ( $encoding === self::GSM_7BIT_EX){
-      $length_exchars = count($ex_chars);
-      # Each exchar in the GSM 7 Bit encoding takes one more space
-      # Hence the length increases by one char for each of those Ex chars. 
-      $length += $length_exchars;
-    }
+      $length = 0;
+
+      foreach($unicode_array as $uc) {
+
+        // UTF-16 stores most characters as two bytes,
+        // but it can only store 0xFFFF (= 65535) characters this way.
+        // Characters above that number are stored as four bytes and
+        // therefore need to count as 2 in length in a text message.
+        $length += ($uc > 65535) ? 2 : 1;
+
+      }
+
+    } else {
+      $length = count($unicode_array);
+
+      if ( $encoding === self::GSM_7BIT_EX){
+        $length_exchars = count($ex_chars);
+        # Each exchar in the GSM 7 Bit encoding takes one more space
+        # Hence the length increases by one char for each of those Ex chars. 
+        $length += $length_exchars;
+      }
+    }    
 
     # Select the per message length according to encoding and the message length
     switch($encoding){
@@ -126,7 +142,7 @@ class SMSCounter{
     }
 
     $messages = ceil($length / $per_message);
-    $remaining = ( $per_message * $messages ) - $length ; 
+    $remaining = ( $per_message * $messages ) - $length;
 
     $returnset = new stdClass();
 
@@ -182,18 +198,47 @@ class SMSCounter{
 
       $this_value = ord( $str[ $i ] );
 
-      if ( $this_value < 128 ) $unicode[] = $this_value;
-      else {
+      if ( $this_value < 128 ) {
+       
+        $unicode[] = $this_value;
+      
+      } else {
 
-        if ( count( $values ) == 0 ) $looking_for = ( $this_value < 224 ) ? 2 : 3;
+        if ( count( $values ) == 0 ) {
+        
+          if ($this_value < 224) {
+            $looking_for = 2;  
+          } else if ($this_value < 240) {
+            $looking_for = 3;
+          } else if ($this_value < 248) {
+            $looking_for = 4;
+          }
+     
+        }
 
         $values[] = $this_value;
 
         if ( count( $values ) == $looking_for ) {
 
-          $number = ( $looking_for == 3 ) ?
-          ( ( $values[0] % 16 ) * 4096 ) + ( ( $values[1] % 64 ) * 64 ) + ( $values[2] % 64 ):
-          ( ( $values[0] % 32 ) * 64 ) + ( $values[1] % 64 );
+          if ($looking_for == 4) {
+        
+            $number = ( ( $values[0] % 8 ) * 262144 ) + 
+                      ( ( $values[1] % 64 ) * 4096 ) + 
+                      ( ( $values[2] % 64 ) * 64 ) + 
+                      ( $values[3] % 64 );
+        
+          } else if ($looking_for == 3) {
+
+            $number = ( ( $values[0] % 16 ) * 4096 ) + 
+                      ( ( $values[1] % 64 ) * 64 ) + 
+                      ( $values[2] % 64 );
+          
+          } else if ($looking_for == 2) {
+          
+            $number = ( ( $values[0] % 32 ) * 64 ) + 
+                      ( $values[1] % 64 );
+          
+          }
 
           $unicode[] = $number;
           $values = array();
