@@ -44,7 +44,7 @@ class SMSCounterTest extends PHPUnit_Framework_TestCase
             "Ä", "Ö", "Ñ", "Ü", "§", "¿", "a", "b", "c", "d",
             "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
             "o", "p", "q", "r", "s", "t", "u", "v", "w", "x",
-            "y", "z", "ä", "ö", "ñ", "ü", "à", "\\");
+            "y", "z", "ä", "ö", "ñ", "ü", "à");
 		$len = count($character_set);
 		for($i = 0; $i< $len; $i++){
 			$this->assertEquals(SMSCounter::GSM_7BIT, SMSCounter::count($character_set[$i])->encoding, sprintf("Testing for character %s for GSM_7BIT", $character_set[$i]));
