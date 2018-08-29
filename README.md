@@ -1,10 +1,10 @@
-#SMS Counter (PHP)
+# SMS Counter (PHP)
 Character counter for SMS Messages
 Original insipration : [danxexe/sms-counter](https://github.com/danxexe/sms-counter)
 
 [![Build Status](https://travis-ci.org/acpmasquerade/sms-counter-php.svg?branch=master)](https://travis-ci.org/acpmasquerade/sms-counter-php)
 
-##Usage
+## Usage
 ```php
 SMSCounter::count('some-string-to-be-counted');	
 ```
@@ -19,7 +19,7 @@ stdClass Object
 	[messages] => 1
 )
 ```
-##Installation
+## Installation
 `sms-counter-php` is available via [composer](http://getcomposer.org) on [packagist](https://packagist.org/packages/acpmasquerade/sms-counter-php).  
 ```json
 {
@@ -29,8 +29,8 @@ stdClass Object
 }
 ```
 
-###Install from WobbleCode repo 
-#####(PS: Separately maintained and slightly deviated.) Please check their documentation before updating your existing installation.
+### Install from WobbleCode repo 
+##### (PS: Separately maintained and slightly deviated.) Please check their documentation before updating your existing installation.
 [https://github.com/wobblecode/sms-counter-php](https://github.com/wobblecode/sms-counter-php)
 `sms-counter-php` is available via [composer](http://getcomposer.org) on [packagist](https://packagist.org/packages/wobblecode/sms-counter-php).  
 ```json
@@ -41,5 +41,5 @@ stdClass Object
 }
 ```
 
-##License
+## License
 SMS Counter (PHP) is released under the [MIT License](LICENSE.txt)
