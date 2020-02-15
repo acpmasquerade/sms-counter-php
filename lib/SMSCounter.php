@@ -81,13 +81,15 @@ class SMSCounter{
    * Detects the encoding, Counts the characters, message length, remaining characters
    * @return - stdClass Object with params encoding,length,per_message,remaining,messages
    */
-  public static function count($text){
+  public static function count($text, $encodingOption=null){
 
     $unicode_array = self::utf8_to_unicode($text);
 
     # variable to catch if any ex chars while encoding detection.
     $ex_chars = array();
-    $encoding = self::detect_encoding($unicode_array, $ex_chars);
+    $encodingDetected = self::detect_encoding($unicode_array, $ex_chars);
+
+    $encoding = empty($encodingOption) ? $encodingDetected : $encodingOption;
 
     if ($encoding === self::UTF16) {
 
