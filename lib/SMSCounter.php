@@ -164,7 +164,7 @@ class SMSCounter{
   public static function detect_encoding ($text, & $ex_chars) {
 
     if(!is_array($text)){
-      $text = utf8_to_unicode($text);
+      $text = self::utf8_to_unicode($text);
     }
 
     $utf16_chars = array_diff($text, self::int_gsm_7bit_combined_map());
